@@ -17,9 +17,25 @@ func BadRequestError(err error) *Response {
 	}
 }
 
+func InternalServerError(err error) *Response {
+	return &Response{
+		Status:  http.StatusInternalServerError,
+		Message: "INTERNAL_SERVER_ERROR",
+		Error:   err.Error(),
+	}
+}
+
 func SuccessCreateResponse(payload interface{}, message string) *Response {
 	return &Response{
 		Status:  http.StatusCreated,
+		Message: message,
+		Payload: payload,
+	}
+}
+
+func SuccessFindResponse(payload interface{}, message string) *Response {
+	return &Response{
+		Status:  http.StatusOK,
 		Message: message,
 		Payload: payload,
 	}

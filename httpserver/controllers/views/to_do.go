@@ -1,4 +1,4 @@
-package models
+package views
 
 import (
 	"database/sql"
@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type ToDo struct {
+type ToDoGet struct {
 	ID          uuid.UUID    `json:"id"`
 	Title       string       `json:"title"`
 	Description string       `json:"description"`
