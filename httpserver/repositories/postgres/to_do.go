@@ -18,7 +18,7 @@ func (t toDoRepo) GetToDos() (*[]models.ToDo, error) {
 
 func (t toDoRepo) GetToDo(id string) (*models.ToDo, error) {
 	var toDo models.ToDo
-	if err := t.db.QueryRow("SELECT * FROM to_dos WHERE id = $1", id).Scan(&toDo.ID, &toDo.Title, &toDo.Description, &toDo.CompletedAt, &toDo.DeletedAt, &toDo.CreatedAt, &toDo.UpdatedAt); err != nil {
+	if err := t.db.QueryRow("SELECT * FROM to_dos WHERE id = $1", id).Scan(&toDo.ID, &toDo.Title, &toDo.Description, &toDo.DueAt, &toDo.CompletedAt, &toDo.DeletedAt, &toDo.CreatedAt, &toDo.UpdatedAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, fmt.Errorf("invalid id : %s", id)
 		}

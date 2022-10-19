@@ -49,6 +49,7 @@ func parseModelToToDoGet(mod *models.ToDo) *views.ToDoGet {
 		ID:          mod.ID,
 		Title:       mod.Title,
 		Description: mod.Description,
+		DueAt:       mod.DueAt,
 		CompletedAt: mod.CompletedAt,
 		DeletedAt:   mod.DeletedAt,
 		CreatedAt:   mod.CreatedAt,
