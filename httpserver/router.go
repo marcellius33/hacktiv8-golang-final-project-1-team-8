@@ -2,6 +2,8 @@ package httpserver
 
 import (
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	"github.com/swaggo/gin-swagger"
 	"hacktiv8-golang-final-project-1-team-8/httpserver/controllers"
 )
 
@@ -24,5 +26,6 @@ func (r *Router) Start(port string) {
 	r.router.PUT("/todos/:id", r.toDo.UpdateToDo)
 	r.router.DELETE("/todos/:id", r.toDo.DeleteToDo)
 
+	r.router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.router.Run(port)
 }

@@ -1,0 +1,115 @@
+basePath: /
+definitions:
+  models.ToDo:
+    properties:
+      completed_at:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      description:
+        type: string
+      due_at:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  params.ToDoCreateRequest:
+    properties:
+      description:
+        type: string
+      due_at:
+        type: string
+      title:
+        type: string
+    required:
+    - description
+    - title
+    type: object
+  views.Response:
+    properties:
+      error: {}
+      message:
+        type: string
+      payload: {}
+      status:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a todo list management application.
+  termsOfService: http://swagger.io/terms/
+  title: Todo Application
+  version: "1.0"
+paths:
+  /todos:
+    post:
+      consumes:
+      - application/json
+      description: create a new task
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/params.ToDoCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ToDo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/views.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.Response'
+      summary: Create new todo
+      tags:
+      - todos
+  /todos/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get a todo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ToDo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/views.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.Response'
+      summary: Get a specific todo
+      tags:
+      - todos
+swagger: "2.0"
