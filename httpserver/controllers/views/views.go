@@ -40,3 +40,11 @@ func SuccessFindResponse(payload interface{}, message string) *Response {
 		Payload: payload,
 	}
 }
+
+func DataConflict(err error) *Response {
+	return &Response{
+		Status:  http.StatusConflict,
+		Message: "DUPLICATE_DATA",
+		Error:   err.Error(),
+	}
+}
