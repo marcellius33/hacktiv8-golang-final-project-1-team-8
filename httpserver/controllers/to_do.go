@@ -1,13 +1,14 @@
 package controllers
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator/v10"
 	"hacktiv8-golang-final-project-1-team-8/httpserver/controllers/params"
 	_ "hacktiv8-golang-final-project-1-team-8/httpserver/controllers/views"
 	_ "hacktiv8-golang-final-project-1-team-8/httpserver/repositories/models"
 	"hacktiv8-golang-final-project-1-team-8/httpserver/services"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 )
 
 type ToDoController struct {
@@ -21,7 +22,7 @@ func NewToDoController(svc *services.ToDoSvc) *ToDoController {
 }
 
 func (t *ToDoController) GetAllToDos(ctx *gin.Context) {
-
+	WriteJsonResponse(ctx, t.svc.GetAllToDos())
 }
 
 // GetToDo godoc
@@ -72,9 +73,27 @@ func (t *ToDoController) CreateToDo(ctx *gin.Context) {
 }
 
 func (t *ToDoController) UpdateToDo(ctx *gin.Context) {
+	var req params.ToDoUpdateRequest
+	err := ctx.ShouldBindJSON(&req)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = validator.New().Struct(req)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	WriteJsonResponse(ctx, t.svc.UpdateToDo(ctx.Param("id"), &req))
 
 }
 
 func (t *ToDoController) DeleteToDo(ctx *gin.Context) {
-
+	WriteJsonResponse(ctx, t.svc.DeleteToDo(ctx.Param("id")))
 }

@@ -11,9 +11,37 @@ type toDoRepo struct {
 	db *sql.DB
 }
 
+func NewToDoRepo(db *sql.DB) repositories.ToDoRepo {
+	return &toDoRepo{
+		db: db,
+	}
+}
+
 func (t toDoRepo) GetToDos() (*[]models.ToDo, error) {
-	//TODO implement me
-	panic("implement me")
+	rows, err := t.db.Query("SELECT * FROM to_dos")
+	if err != nil {
+		return &[]models.ToDo{}, err
+	}
+	defer rows.Close()
+
+	var toDos []models.ToDo
+	for rows.Next(){
+		var toDo models.ToDo
+		rows.Scan(
+			&toDo.ID,
+			&toDo.Title,
+			&toDo.Description,
+			&toDo.DueAt,
+			&toDo.CompletedAt,
+			&toDo.DeletedAt,
+			&toDo.CreatedAt,
+			&toDo.UpdatedAt,
+		)
+
+		toDos =append(toDos, toDo)
+	}
+
+	return &toDos, nil
 }
 
 func (t toDoRepo) GetToDo(id string) (*models.ToDo, error) {
@@ -39,18 +67,20 @@ func (t toDoRepo) CreateToDo(toDo *models.ToDo) error {
 	return err
 }
 
-func (t toDoRepo) UpdateToDo(toDo *models.ToDo) (*models.ToDo, error) {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (t toDoRepo) DeleteToDo(toDo *models.ToDo) error {
-	//TODO implement me
-	panic("implement me")
-}
-
-func NewToDoRepo(db *sql.DB) repositories.ToDoRepo {
-	return &toDoRepo{
-		db: db,
+func (t toDoRepo) UpdateToDo(toDo *models.ToDo)  error {
+	stmt, err := t.db.Prepare("UPDATE to_dos SET title = $1, description = $2, due_at = $3, completed_at = $4, updated_at =$5 RETURNING id")
+	if err != nil {
+		return err
 	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(toDo.Title, toDo.Description, toDo.DueAt, toDo.CompletedAt, toDo.UpdatedAt)
+
+	return err
+}
+
+func (t toDoRepo) DeleteToDo(id string) error {
+	_, err := t.db.Exec("DELETE FROM to_dos WHERE id = $1", id)
+
+	return err
 }

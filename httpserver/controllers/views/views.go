@@ -41,10 +41,33 @@ func SuccessFindResponse(payload interface{}, message string) *Response {
 	}
 }
 
+func DataNotFound(err error) *Response {
+	return &Response{
+		Status:  http.StatusNotFound,
+		Message: "NO_DATA",
+		Error:   err.Error(),
+	}
+}
+
 func DataConflict(err error) *Response {
 	return &Response{
 		Status:  http.StatusConflict,
 		Message: "DUPLICATE_DATA",
 		Error:   err.Error(),
+	}
+}
+
+func SuccessUpdateResponse(payload interface{}, message string) *Response {
+	return &Response{
+		Status:  http.StatusOK,
+		Message: message,
+		Payload: payload,
+	}
+}
+
+func SuccessDeleteResponse(message string) *Response {
+	return &Response{
+		Status:  http.StatusOK,
+		Message: message,
 	}
 }
