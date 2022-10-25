@@ -21,7 +21,7 @@ func NewToDoController(svc *services.ToDoSvc) *ToDoController {
 	}
 }
 
-// GetToDos godoc
+// GetAllToDos godoc
 // @Summary      Get todos
 // @Description  Get todos
 // @Tags         todos
