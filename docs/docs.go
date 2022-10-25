@@ -153,7 +153,7 @@ const docTemplate = `{
                 }   
             },
             "put": {
-                "description": "update a new task",
+                "description": "Update todo",
                 "consumes": [
                     "application/json"
                 ],
@@ -203,7 +203,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "Delete a todo",
+                "description": "Delete todo",
                 "consumes": [
                     "application/json"
                 ],

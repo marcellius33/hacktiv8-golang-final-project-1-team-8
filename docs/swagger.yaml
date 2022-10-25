@@ -141,7 +141,7 @@ paths:
     put:
       consumes:
       - application/json
-      description: update a task
+      description: Update todo
       parameters:
       - description: query params
         in: body
@@ -174,7 +174,7 @@ paths:
     delete:
       consumes:
       - application/json
-      description: Get a todo
+      description: Delete todo
       produces:
       - application/json
       responses:

@@ -22,8 +22,8 @@ func NewToDoController(svc *services.ToDoSvc) *ToDoController {
 }
 
 // GetToDos godoc
-// @Summary      Create new todo
-// @Description  create a new task
+// @Summary      Get todos
+// @Description  Get todos
 // @Tags         todos
 // @Accept       json
 // @Produce      json
@@ -84,8 +84,8 @@ func (t *ToDoController) CreateToDo(ctx *gin.Context) {
 }
 
 // UpdateToDo godoc
-// @Summary Get a specific todo
-// @Description Get a todo
+// @Summary Update todo
+// @Description Update todo
 // @Tags         todos
 // @Accept       json
 // @Produce      json
@@ -119,7 +119,7 @@ func (t *ToDoController) UpdateToDo(ctx *gin.Context) {
 
 // DeleteToDo godoc
 // @Summary Delete todo
-// @Description Get a todo
+// @Description Delete todo
 // @Tags         todos
 // @Accept       json
 // @Produce      json
