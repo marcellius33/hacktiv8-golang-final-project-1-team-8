@@ -85,6 +85,32 @@ paths:
       summary: Create new todo
       tags:
       - todos
+    get:
+      consumes:
+      - application/json
+      description: Get todos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ToDo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/views.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.Response'
+      summary: Get a specific todo
+      tags:
+      - todos
   /todos/{id}:
     get:
       consumes:
@@ -110,6 +136,65 @@ paths:
           schema:
             $ref: '#/definitions/views.Response'
       summary: Get a specific todo
+      tags:
+      - todos
+    put:
+      consumes:
+      - application/json
+      description: update a task
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/params.ToDoUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ToDo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/views.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.Response'
+      summary: Create new todo
+      tags:
+      - todos
+    delete:
+      consumes:
+      - application/json
+      description: Get a todo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ToDo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/views.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.Response'
+      summary: Delete todo
       tags:
       - todos
 swagger: "2.0"

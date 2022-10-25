@@ -21,6 +21,17 @@ func NewToDoController(svc *services.ToDoSvc) *ToDoController {
 	}
 }
 
+// GetToDos godoc
+// @Summary      Create new todo
+// @Description  create a new task
+// @Tags         todos
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  models.ToDo
+// @Failure      400  {object}  views.Response
+// @Failure      404  {object}  views.Response
+// @Failure      500  {object}  views.Response
+// @Router       /todos [get]
 func (t *ToDoController) GetAllToDos(ctx *gin.Context) {
 	WriteJsonResponse(ctx, t.svc.GetAllToDos())
 }
@@ -72,6 +83,18 @@ func (t *ToDoController) CreateToDo(ctx *gin.Context) {
 	WriteJsonResponse(ctx, t.svc.CreateToDo(&req))
 }
 
+// UpdateToDo godoc
+// @Summary Get a specific todo
+// @Description Get a todo
+// @Tags         todos
+// @Accept       json
+// @Produce      json
+// @Param request body params.ToDoCreateRequest true "query params"
+// @Success      200  {object}  models.ToDo
+// @Failure      400  {object}  views.Response
+// @Failure      404  {object}  views.Response
+// @Failure      500  {object}  views.Response
+// @Router       /todos/{id} [put]
 func (t *ToDoController) UpdateToDo(ctx *gin.Context) {
 	var req params.ToDoUpdateRequest
 	err := ctx.ShouldBindJSON(&req)
@@ -94,6 +117,17 @@ func (t *ToDoController) UpdateToDo(ctx *gin.Context) {
 
 }
 
+// GetToDo godoc
+// @Summary Get a specific todo
+// @Description Get a todo
+// @Tags         todos
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  models.ToDo
+// @Failure      400  {object}  views.Response
+// @Failure      404  {object}  views.Response
+// @Failure      500  {object}  views.Response
+// @Router       /todos/{id} [delete]
 func (t *ToDoController) DeleteToDo(ctx *gin.Context) {
 	WriteJsonResponse(ctx, t.svc.DeleteToDo(ctx.Param("id")))
 }
