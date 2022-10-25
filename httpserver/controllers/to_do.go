@@ -117,8 +117,8 @@ func (t *ToDoController) UpdateToDo(ctx *gin.Context) {
 
 }
 
-// GetToDo godoc
-// @Summary Get a specific todo
+// DeleteToDo godoc
+// @Summary Delete todo
 // @Description Get a todo
 // @Tags         todos
 // @Accept       json
