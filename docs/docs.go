@@ -291,7 +291,7 @@ const docTemplate = `{
                 }
             }
         },
-        "params.ToDoCreateRequest": {
+        "params.ToDoUpdateRequest": {
             "type": "object",
             "required": [
                 "description",
@@ -307,9 +307,9 @@ const docTemplate = `{
                 "title": {
                     "type": "string"
                 },
-                "created_at": {
+                "completed_at": {
                     "type": "string"
-                },
+                }
             }
         },
         "views.Response": {

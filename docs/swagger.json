@@ -284,6 +284,27 @@
                 }
             }
         },
+        "params.ToDoUpdateRequest": {
+            "type": "object",
+            "required": [
+                "description",
+                "title"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "due_at": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "completed_at": {
+                    "type": "string"
+                }
+            }
+        },
         "views.Response": {
             "type": "object",
             "properties": {
